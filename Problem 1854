@@ -1,0 +1,22 @@
+    int maximumPopulation(vector<vector<int>>& logs) {
+        const int MIN_YEAR = 1950;
+        const int MAX_YEAR = 2050;
+        vector<int> delta(MAX_YEAR + 1, 0);
+
+	for (const auto& log : logs) {
+            delta[log[0]]++;
+            delta[log[1]]--;
+        }
+
+        int maxYear = MIN_YEAR;
+        int currentPop = 0, maxPop = 0;
+        for (int year = MIN_YEAR; year <= MAX_YEAR; ++year) {
+            currentPop += delta[year];
+            if (currentPop > maxPop) {
+                maxPop = currentPop;
+                maxYear = year;
+            }
+        }
+
+        return maxYear;
+    }
